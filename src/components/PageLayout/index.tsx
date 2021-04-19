@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { TPageLayoutPropsType } from './types'
 import { makeStyles } from '@material-ui/core/styles'
-import Image from 'assets/background.svg'
 
 const usePageLayoutStyles = makeStyles(() => ({
   root: {
