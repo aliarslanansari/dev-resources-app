@@ -1,6 +1,6 @@
 import { Button, Card, InputAdornment, Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import React from 'react'
+import { useState } from 'react'
 import PageWrapper from '../../components/PageWrapper'
 import TextField from '../../components/TextField'
 import AccountCircle from '@material-ui/icons/AccountCircle'
@@ -33,10 +33,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   cardRoot: {
     padding: theme.spacing(2),
-    backgroundColor: theme.palette.primary.dark
+    backgroundColor: theme.palette.primary.main
   }
 }))
 const LoginPageContainer = () => {
+  const [cred, setCreds] = useState({
+    username: '',
+    password: ''
+  })
   const classes = useStyles()
   return (
     <PageWrapper>
@@ -44,29 +48,31 @@ const LoginPageContainer = () => {
         <Card className={classes.cardRoot}>
           <FormControl className={classes.formControl}>
             <TextField
+              value={cred.username}
               label={'Username'}
-              className={classes.textField}
+              onChange={(e) => {
+                setCreds((s) => ({ ...s, username: e.currentTarget.value }))
+              }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <AccountCircle color='primary' />
+                    <AccountCircle color='secondary' />
                   </InputAdornment>
-                ),
-                classes: {
-                  notchedOutline: classes.notchedOutline,
-                  focused: classes.textFieldFocused
-                }
+                )
               }}
             />
           </FormControl>
           <FormControl className={classes.formControl}>
             <TextField
+              value={cred.password}
               label='Password'
-              className={classes.textField}
+              onChange={(e) =>
+                setCreds((s) => ({ ...s, password: e.currentTarget.value }))
+              }
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
-                    <LockIcon color='primary' />
+                    <LockIcon color='secondary' />
                   </InputAdornment>
                 )
               }}
