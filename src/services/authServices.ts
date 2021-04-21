@@ -1,4 +1,5 @@
 import { Auth } from 'aws-amplify'
+import { getResponse } from '../utils/apiUtils'
 
 interface IUserSignInTypes {
   username: string
@@ -7,5 +8,5 @@ interface IUserSignInTypes {
 
 export const userSignIn = (payload: IUserSignInTypes) => {
   const { username, password } = payload
-  return () => Auth.signIn({ username, password })
+  return getResponse(() => Auth.signIn({ username, password }))
 }

@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
     borderRadius: theme.spacing(1),
+    // transition: 'margin 0.05s',
     '&:hover': {
       marginTop: 12
     }

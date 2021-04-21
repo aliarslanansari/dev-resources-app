@@ -6,6 +6,7 @@ import TextField from '../../components/TextField'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import LockIcon from '@material-ui/icons/Lock'
 import FormControl from '@material-ui/core/FormControl'
+import { userSignIn } from '../../services/authServices'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -42,6 +43,10 @@ const LoginPageContainer = () => {
     password: ''
   })
   const classes = useStyles()
+  const handleLoginClick = async () => {
+    const user = await userSignIn(cred)
+    console.log(user)
+  }
   return (
     <PageWrapper>
       <div className={classes.root}>
@@ -51,7 +56,7 @@ const LoginPageContainer = () => {
               value={cred.username}
               label={'Username'}
               onChange={(e) => {
-                setCreds((s) => ({ ...s, username: e.currentTarget.value }))
+                setCreds((s) => ({ ...s, username: e.target.value }))
               }}
               InputProps={{
                 startAdornment: (
@@ -67,7 +72,7 @@ const LoginPageContainer = () => {
               value={cred.password}
               label='Password'
               onChange={(e) =>
-                setCreds((s) => ({ ...s, password: e.currentTarget.value }))
+                setCreds((s) => ({ ...s, password: e.target.value }))
               }
               InputProps={{
                 startAdornment: (
@@ -79,7 +84,11 @@ const LoginPageContainer = () => {
             />
           </FormControl>
           <FormControl className={classes.formControl}>
-            <Button variant='outlined' color='secondary'>
+            <Button
+              variant='outlined'
+              color='secondary'
+              onClick={handleLoginClick}
+            >
               Login
             </Button>
           </FormControl>

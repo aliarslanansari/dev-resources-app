@@ -8,20 +8,24 @@ import { routeConfig } from '../../routeConfig'
 import { ApolloProvider } from 'react-apollo'
 import { createAndConfigureAppSyncClient } from '../../utils/apiUtils'
 import awsConfig from '../../aws-exports'
+import { Provider } from 'react-redux'
+import store from '../../store'
 
 const appSyncClient = createAndConfigureAppSyncClient(awsConfig)
 
 const AppContainer = () => {
   return (
     <React.Fragment>
-      <ApolloProvider client={appSyncClient}>
-        <ThemeProvider theme={theme}>
-          <AppNavBar />
-          <PageLayout>
-            <Routes routeConfig={routeConfig} />
-          </PageLayout>
-        </ThemeProvider>
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={appSyncClient}>
+          <ThemeProvider theme={theme}>
+            <AppNavBar />
+            <PageLayout>
+              <Routes routeConfig={routeConfig} />
+            </PageLayout>
+          </ThemeProvider>
+        </ApolloProvider>
+      </Provider>
     </React.Fragment>
   )
 }

@@ -15,7 +15,7 @@ export const GRAPHQL_OPERATION_TYPES = {
 
 export const getClient = () => appSyncClient
 
-export const getResponse = (apiCallFn: Function, payload: any) =>
+export const getResponse = (apiCallFn: Function, payload?: any) =>
   apiCallFn.call(this, payload)
 
 export const graphQlOperation = (
