@@ -6,8 +6,7 @@ export const routeConfig: RouteConfig = {
   login: {
     render: lazyLoader(() => import('./container/LoginPageContainer')),
     path: '/login',
-    exact: true,
-    isProtected: true
+    exact: true
   },
   homePage: {
     render: lazyLoader(() => import('./container/HomeContainer')),

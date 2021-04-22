@@ -6,6 +6,13 @@ const selectAuthenticatorDomain = (state: any) =>
   state.loginPageContainer || initialState
 
 export const selectIsLoggedIn = () =>
-  createSelector(selectAuthenticatorDomain, (substate: any) =>
-    get(substate, 'isLoggedIn')
+  createSelector(
+    selectAuthenticatorDomain,
+    (substate: any) => get(substate, 'isLoggedIn') as boolean
+  )
+
+export const selectLoading = () =>
+  createSelector(
+    selectAuthenticatorDomain,
+    (substate: any) => get(substate, 'loading') as boolean
   )

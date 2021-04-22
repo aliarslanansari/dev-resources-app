@@ -1,6 +1,7 @@
 import { Button, Card, InputAdornment, Theme } from '@material-ui/core'
+import DRButton from '../../components/DRButton'
 import { makeStyles } from '@material-ui/styles'
-import { Dispatch, useState } from 'react'
+import { Dispatch, useEffect, useState } from 'react'
 import PageWrapper from '../../components/PageWrapper'
 import TextField from '../../components/TextField'
 import AccountCircle from '@material-ui/icons/AccountCircle'
@@ -11,10 +12,13 @@ import FormControl from '@material-ui/core/FormControl'
 import { useInjectSaga } from 'redux-injectors'
 import saga from './saga'
 import { createStructuredSelector } from 'reselect'
-import { selectIsLoggedIn } from './selectors'
+import { selectIsLoggedIn, selectLoading } from './selectors'
 import { connect, ConnectedProps } from 'react-redux'
 import { compose } from 'redux'
-import { loginPageContainerCreators, loginPageContainerTypes } from './reducer'
+import { loginPageContainerCreators } from './reducer'
+import { routeConfig } from '../../routeConfig'
+import get from 'lodash/get'
+import history from '../../utils/history'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -46,17 +50,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 const LoginPageContainer = (props: PropsFromRedux) => {
-  const { isLoggedIn, dispatchReset } = props
   useInjectSaga({ key: 'loginPageContainer', saga })
+  const classes = useStyles()
+
+  const { isLoggedIn, dispatchRequestLogin, loading } = props
+
   const [cred, setCreds] = useState({
     username: '',
     password: ''
   })
-  const classes = useStyles()
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push(routeConfig.homePage?.path || '/')
+    }
+  }, [isLoggedIn])
+
   const handleLoginClick = async () => {
-    // const user = await userSignIn(cred)
-    dispatchReset()
-    // console.log(user)
+    dispatchRequestLogin(cred)
   }
   return (
     <PageWrapper>
@@ -95,13 +106,7 @@ const LoginPageContainer = (props: PropsFromRedux) => {
             />
           </FormControl>
           <FormControl className={classes.formControl}>
-            <Button
-              variant='outlined'
-              color='secondary'
-              onClick={handleLoginClick}
-            >
-              Login
-            </Button>
+            <DRButton onClick={handleLoginClick} loading={loading} label='Login'>
           </FormControl>
           <FormControl className={classes.formControl}>
             <Button color='secondary' variant='outlined'>
@@ -115,20 +120,14 @@ const LoginPageContainer = (props: PropsFromRedux) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isLoggedIn: selectIsLoggedIn()
+  isLoggedIn: selectIsLoggedIn(),
+  loading: selectLoading()
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    dispatchReset: () => {
-      alert(
-        JSON.stringify(
-          { loginPageContainerTypes, loginPageContainerCreators },
-          null,
-          2
-        )
-      )
-      // return dispatch(loginPageContainerCreators.reset)
+    dispatchRequestLogin: (payload: IUserSignInTypes) => {
+      return dispatch(loginPageContainerCreators.requestLogin(payload))
     }
   }
 }

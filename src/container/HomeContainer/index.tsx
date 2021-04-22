@@ -1,5 +1,7 @@
 import { Grid } from '@material-ui/core'
 import PageWrapper from '../../components/PageWrapper'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-dom'
 import ResourceCard from '../../components/ResourceCard'
 
 const HomeContainer = () => {
@@ -35,4 +37,4 @@ const HomeContainer = () => {
   )
 }
 
-export default HomeContainer
+export default compose(withRouter)(HomeContainer)
