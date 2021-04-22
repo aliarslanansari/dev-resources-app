@@ -17,8 +17,6 @@ export function* requestLogin(action: AnyAction) {
 
 export function* requestUserSignout() {
   try {
-    alert(1)
-
     yield call(userSignOut)
     yield put(loginPageContainerCreators.successUserLogout())
   } catch (error) {

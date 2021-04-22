@@ -1,8 +1,8 @@
 import { Button, ButtonProps, CircularProgress } from '@material-ui/core'
 
 interface DRButtonPropsTypes extends ButtonProps {
-  onClick: () => void
-  loading: boolean
+  onClick?: () => void
+  loading?: boolean
   label: string
 }
 

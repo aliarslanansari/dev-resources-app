@@ -14,11 +14,11 @@ export default function PageWrapper(props: TPageWrapperPropsType) {
 
   return (
     <Grid container className={classes.root}>
-      <Grid sm={1} xs={1} md={2}></Grid>
-      <Grid sm={10} xs={10} md={8}>
+      <Grid item sm={1} xs={1} md={2}></Grid>
+      <Grid item sm={10} xs={10} md={8}>
         {props.children}
       </Grid>
-      <Grid sm={1} xs={1} md={2}></Grid>
+      <Grid item sm={1} xs={1} md={2}></Grid>
     </Grid>
   )
 }

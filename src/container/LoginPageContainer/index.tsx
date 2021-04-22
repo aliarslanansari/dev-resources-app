@@ -1,4 +1,10 @@
-import { Button, Card, InputAdornment, Theme } from '@material-ui/core'
+import {
+  Button,
+  Card,
+  InputAdornment,
+  Theme,
+  Typography
+} from '@material-ui/core'
 import FormControl from '@material-ui/core/FormControl'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import LockIcon from '@material-ui/icons/Lock'
@@ -17,8 +23,14 @@ import { useHistory, withRouter } from 'react-router-dom'
 import { loginPageContainerCreators } from './reducer'
 import saga from './saga'
 import { selectIsLoggedIn, selectLoading } from './selectors'
+import { validationSchema } from './formikValidation'
+import { useFormik } from 'formik'
 
 const useStyles = makeStyles((theme: Theme) => ({
+  titleText: {
+    margin: '1rem',
+    alignSelf: 'center'
+  },
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -51,13 +63,7 @@ const LoginPageContainer = (props: PropsFromRedux) => {
   useInjectSaga({ key: 'loginPageContainer', saga })
   const classes = useStyles()
   const history = useHistory()
-
   const { isLoggedIn, dispatchRequestLogin, loading } = props
-
-  const [cred, setCreds] = useState({
-    username: '',
-    password: ''
-  })
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -65,20 +71,36 @@ const LoginPageContainer = (props: PropsFromRedux) => {
     }
   }, [isLoggedIn])
 
-  const handleLoginClick = async () => {
-    dispatchRequestLogin(cred)
-  }
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password: ''
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      dispatchRequestLogin(values)
+    }
+  })
   return (
     <PageWrapper>
       <div className={classes.root}>
+        <Typography
+          color='secondary'
+          variant='h5'
+          className={classes.titleText}
+        >
+          Login from here
+        </Typography>
         <Card className={classes.cardRoot}>
           <FormControl className={classes.formControl}>
             <TextField
-              value={cred.username}
-              label={'Username'}
-              onChange={(e) => {
-                setCreds((s) => ({ ...s, username: e.target.value }))
-              }}
+              id='username'
+              name='username'
+              label='Email'
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -90,11 +112,15 @@ const LoginPageContainer = (props: PropsFromRedux) => {
           </FormControl>
           <FormControl className={classes.formControl}>
             <TextField
-              value={cred.password}
+              fullWidth
+              id='password'
+              name='password'
               label='Password'
-              onChange={(e) =>
-                setCreds((s) => ({ ...s, password: e.target.value }))
-              }
+              type='password'
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position='start'>
@@ -106,14 +132,15 @@ const LoginPageContainer = (props: PropsFromRedux) => {
           </FormControl>
           <FormControl className={classes.formControl}>
             <DRButton
-              onClick={handleLoginClick}
               loading={loading}
+              type='submit'
               label='Login'
+              onClick={formik.handleSubmit}
             />
           </FormControl>
           <FormControl className={classes.formControl}>
             <Button color='secondary' variant='outlined'>
-              Register | {JSON.stringify({ isLoggedIn })}
+              Register
             </Button>
           </FormControl>
         </Card>
