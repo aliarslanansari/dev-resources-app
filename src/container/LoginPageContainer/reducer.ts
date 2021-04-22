@@ -31,30 +31,32 @@ export const loginPageContainer = (state = initialState, action: AnyAction) =>
   produce(state, (draft) => {
     switch (action.type) {
       case loginPageContainerTypes.REQUEST_LOGIN:
-        draft['loading'] = true
-        draft['isLoggedIn'] = false
-        break
+        draft.loading = true
+        draft.isLoggedIn = false
+        return draft
       case loginPageContainerTypes.SUCCESS_LOGIN:
-        draft['loading'] = false
-        draft['isLoggedIn'] = true
-        draft['user'] = action.payload.user
-        break
+        draft.loading = false
+        draft.isLoggedIn = true
+        draft.user = action.payload.user
+        return draft
       case loginPageContainerTypes.FAILURE_LOGIN:
-        draft['error'] = action.payload
-        draft['loading'] = false
-        draft['isLoggedIn'] = false
-        break
+        draft.error = action.payload
+        draft.loading = false
+        draft.isLoggedIn = false
+        return draft
       case loginPageContainerTypes.REQUEST_USER_LOGOUT:
-        draft['loading'] = true
-        break
+        draft.loading = false
+        return draft
       case loginPageContainerTypes.SUCCESS_USER_LOGOUT:
-        draft['loading'] = true
-        draft['isLoggedIn'] = false
-        draft['user'] = {}
-        break
+        draft.loading = false
+        draft.error = action.payload
+        draft.isLoggedIn = false
+        draft.user = {}
+        return draft
       case loginPageContainerTypes.FAILURE_USER_LOGOUT:
-        draft['loading'] = true
-        break
+        draft.loading = false
+        draft.error = action.payload
+        return draft
       default:
         return draft
     }

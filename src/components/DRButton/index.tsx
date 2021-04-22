@@ -1,13 +1,13 @@
 import { Button, ButtonProps, CircularProgress } from '@material-ui/core'
-import { ReactChild, ReactChildren } from 'react'
 
 interface DRButtonPropsTypes extends ButtonProps {
-  onClick: Function
+  onClick: () => void
   loading: boolean
+  label: string
 }
 
 function DRButton(props: DRButtonPropsTypes) {
-  const { onClick, loading } = props
+  const { onClick, loading, label } = props
   return (
     <Button
       variant='outlined'
@@ -15,8 +15,8 @@ function DRButton(props: DRButtonPropsTypes) {
       onClick={onClick}
       disabled={loading}
     >
-      {loading && <CircularProgress size={14} />}
-      {!loading && 'Click Me'}
+      {loading && <CircularProgress color='secondary' size={'2rem'} />}
+      {!loading && label}
     </Button>
   )
 }

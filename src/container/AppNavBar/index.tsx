@@ -7,8 +7,7 @@ import { loginPageContainerCreators } from '../LoginPageContainer/reducer'
 import { selectIsLoggedIn } from '../LoginPageContainer/selectors'
 import { routeConfig } from '../../routeConfig'
 import saga from './saga'
-import { withRouter } from 'react-router'
-import history from '../../utils/history'
+import { useHistory, withRouter } from 'react-router'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const AppNavBar = () => {
   useInjectSaga({ key: 'navBar', saga })
   const dispatch = useDispatch()
+  const history = useHistory()
   const classes = useStyles()
   const isLoggedIn = useSelector(selectIsLoggedIn())
   const onLoginLogoutClick = () => {

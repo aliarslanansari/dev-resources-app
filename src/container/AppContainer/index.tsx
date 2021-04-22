@@ -1,26 +1,26 @@
-import React from 'react'
-import PageLayout from '../../components/PageLayout'
-import AppNavBar from '../AppNavBar'
 import { ThemeProvider } from '@material-ui/styles'
-import { theme } from '../../theme'
-import Routes from '../../components/Routes'
-import { PersistGate } from 'redux-persist/integration/react'
-import { routeConfig } from '../../routeConfig'
+import React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { createAndConfigureAppSyncClient } from '../../utils/apiUtils'
-import awsConfig from '../../aws-exports'
 import { Provider } from 'react-redux'
-import store, { persistor } from '../../store'
 import { BrowserRouter } from 'react-router-dom'
+import { PersistGate } from 'redux-persist/integration/react'
+import awsConfig from '../../aws-exports'
+import PageLayout from '../../components/PageLayout'
+import Routes from '../../components/Routes'
+import { routeConfig } from '../../routeConfig'
+import store, { persistor } from '../../store'
+import { theme } from '../../theme'
+import { createAndConfigureAppSyncClient } from '../../utils/apiUtils'
+import AppNavBar from '../AppNavBar'
 
 const appSyncClient = createAndConfigureAppSyncClient(awsConfig)
 
 const AppContainer = () => {
   return (
     <React.Fragment>
-      <BrowserRouter>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
             <ApolloProvider client={appSyncClient}>
               <ThemeProvider theme={theme}>
                 <AppNavBar />
@@ -29,9 +29,9 @@ const AppContainer = () => {
                 </PageLayout>
               </ThemeProvider>
             </ApolloProvider>
-          </PersistGate>
-        </Provider>
-      </BrowserRouter>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </React.Fragment>
   )
 }

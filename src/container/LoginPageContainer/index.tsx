@@ -1,24 +1,22 @@
 import { Button, Card, InputAdornment, Theme } from '@material-ui/core'
-import DRButton from '../../components/DRButton'
-import { makeStyles } from '@material-ui/styles'
-import { Dispatch, useEffect, useState } from 'react'
-import PageWrapper from '../../components/PageWrapper'
-import TextField from '../../components/TextField'
+import FormControl from '@material-ui/core/FormControl'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import LockIcon from '@material-ui/icons/Lock'
-import { withRouter } from 'react-router-dom'
-import FormControl from '@material-ui/core/FormControl'
-// import { userSignIn } from '../../services/authServices'
-import { useInjectSaga } from 'redux-injectors'
-import saga from './saga'
-import { createStructuredSelector } from 'reselect'
-import { selectIsLoggedIn, selectLoading } from './selectors'
+import { makeStyles } from '@material-ui/styles'
+import { Dispatch, useEffect, useState } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { compose } from 'redux'
-import { loginPageContainerCreators } from './reducer'
+// import { userSignIn } from '../../services/authServices'
+import { useInjectSaga } from 'redux-injectors'
+import { createStructuredSelector } from 'reselect'
+import DRButton from '../../components/DRButton'
+import PageWrapper from '../../components/PageWrapper'
+import TextField from '../../components/TextField'
 import { routeConfig } from '../../routeConfig'
-import get from 'lodash/get'
-import history from '../../utils/history'
+import { useHistory, withRouter } from 'react-router-dom'
+import { loginPageContainerCreators } from './reducer'
+import saga from './saga'
+import { selectIsLoggedIn, selectLoading } from './selectors'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -26,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignContent: 'center',
-    width: '100vh',
-    height: '90vh'
+    height: '90vh',
+    padding: '0 15%'
   },
   textField: {
     width: '100%',
@@ -52,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const LoginPageContainer = (props: PropsFromRedux) => {
   useInjectSaga({ key: 'loginPageContainer', saga })
   const classes = useStyles()
+  const history = useHistory()
 
   const { isLoggedIn, dispatchRequestLogin, loading } = props
 
@@ -106,7 +105,11 @@ const LoginPageContainer = (props: PropsFromRedux) => {
             />
           </FormControl>
           <FormControl className={classes.formControl}>
-            <DRButton onClick={handleLoginClick} loading={loading} label='Login'>
+            <DRButton
+              onClick={handleLoginClick}
+              loading={loading}
+              label='Login'
+            />
           </FormControl>
           <FormControl className={classes.formControl}>
             <Button color='secondary' variant='outlined'>
