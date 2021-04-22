@@ -4,12 +4,13 @@ import AppNavBar from '../../components/AppNavBar'
 import { ThemeProvider } from '@material-ui/styles'
 import { theme } from '../../theme'
 import Routes from '../../components/Routes'
+import { PersistGate } from 'redux-persist/integration/react'
 import { routeConfig } from '../../routeConfig'
 import { ApolloProvider } from 'react-apollo'
 import { createAndConfigureAppSyncClient } from '../../utils/apiUtils'
 import awsConfig from '../../aws-exports'
 import { Provider } from 'react-redux'
-import store from '../../store'
+import store, { persistor } from '../../store'
 
 const appSyncClient = createAndConfigureAppSyncClient(awsConfig)
 
@@ -17,14 +18,16 @@ const AppContainer = () => {
   return (
     <React.Fragment>
       <Provider store={store}>
-        <ApolloProvider client={appSyncClient}>
-          <ThemeProvider theme={theme}>
-            <AppNavBar />
-            <PageLayout>
-              <Routes routeConfig={routeConfig} />
-            </PageLayout>
-          </ThemeProvider>
-        </ApolloProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ApolloProvider client={appSyncClient}>
+            <ThemeProvider theme={theme}>
+              <AppNavBar />
+              <PageLayout>
+                <Routes routeConfig={routeConfig} />
+              </PageLayout>
+            </ThemeProvider>
+          </ApolloProvider>
+        </PersistGate>
       </Provider>
     </React.Fragment>
   )
