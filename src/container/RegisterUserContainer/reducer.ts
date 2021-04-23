@@ -27,11 +27,7 @@ export const {
   failureUserSignUp: ['payload']
 })
 
-/* eslint-disable default-case, no-param-reassign */
-export const registerUserContainerReducer = (
-  state = initialState,
-  action: AnyAction
-) =>
+export const homeContainerReducer = (state = initialState, action: AnyAction) =>
   produce(state, (draft) => {
     switch (action.type) {
       case registerUserContainerTypes.REQUEST_USER_SIGN_UP:
@@ -64,4 +60,4 @@ export const registerUserContainerReducer = (
     }
   })
 
-export default registerUserContainerReducer
+export default homeContainerReducer

@@ -5,11 +5,13 @@ import loginPageContainer, {
   loginPageContainerTypes
 } from '../container/LoginPageContainer/reducer'
 import registerUserContainerReducer from '../container/RegisterUserContainer/reducer'
+import homeContainerReducer from '../container/HomeContainer/reducer'
 export default function createReducer() {
   const appReducer = combineReducers({
     router: connectRouter(history),
     loginPageContainer,
-    registerUserContainerReducer
+    registerUserContainerReducer,
+    homeContainerReducer
   })
 
   const rootReducer = (state: any, action: any) => {

@@ -40,7 +40,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const ResourceCard = () => {
+interface ResourceCardPropsTypes {
+  title: string
+  description: string
+}
+
+const ResourceCard = (props: ResourceCardPropsTypes) => {
   const classes = useStyles()
 
   return (
@@ -53,7 +58,7 @@ const ResourceCard = () => {
         >
           ALI ARSALAN
         </Typography>
-        <Typography variant='h6'>Javascript Resources Repository</Typography>
+        <Typography variant='h6'>{props.title}</Typography>
         <CardMedia
           className={classes.media}
           image='https://www.javascript.com/content/pluralsight/en/jscom/resources/jcr:content/main/generic_block_237304881/parsys/column_control/column-parsys-1/image/image-res.img.245946ba-3e2a-430c-bdaf-a30c510c963a.jpg'
