@@ -11,7 +11,8 @@ export const initialState = {
   isLoggedIn: false,
   loading: false,
   user: {},
-  error: {}
+  error: {},
+  attributes: {}
 }
 
 export const {
@@ -38,6 +39,7 @@ export const loginPageContainer = (state = initialState, action: AnyAction) =>
         draft.loading = false
         draft.isLoggedIn = true
         draft.user = action.payload.user
+        draft.attributes = action?.payload?.user?.attributes || {}
         return draft
       case loginPageContainerTypes.FAILURE_LOGIN:
         draft.error = action.payload

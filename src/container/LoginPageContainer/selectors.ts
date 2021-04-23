@@ -5,6 +5,12 @@ import get from 'lodash/get'
 const selectAuthenticatorDomain = (state: any) =>
   state.loginPageContainer || initialState
 
+export const selectAttributes = () =>
+  createSelector(
+    selectAuthenticatorDomain,
+    (substate: any) => get(substate, 'attributes') as UserAttributes
+  )
+
 export const selectIsLoggedIn = () =>
   createSelector(
     selectAuthenticatorDomain,

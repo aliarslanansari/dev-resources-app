@@ -45,7 +45,10 @@ interface ChallengeParam {
 }
 
 interface UserAttributes {
-  email: string
+  email?: string
+  sub?: string
+  email_verified?: boolean
+  name?: string
 }
 
 interface Client {

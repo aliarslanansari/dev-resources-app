@@ -4,7 +4,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { useInjectSaga } from 'redux-injectors'
 import { loginPageContainerCreators } from '../LoginPageContainer/reducer'
-import { selectIsLoggedIn } from '../LoginPageContainer/selectors'
+import {
+  selectIsLoggedIn,
+  selectAttributes
+} from '../LoginPageContainer/selectors'
 import { routeConfig } from '../../routeConfig'
 import saga from './saga'
 import { useHistory, withRouter } from 'react-router'
@@ -15,6 +18,17 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing(2),
+      flexGrow: 1,
+      display: 'flex',
+      justifyContent: 'center',
+      justifyItems: 'center',
+      backgroundColor: theme.palette.primary.dark,
+      flexDirection: 'row',
+      alignItems: 'center',
+      color: theme.palette.primary.contrastText
+    },
+    leftOptions: {
+      width: '100%',
       flexGrow: 1,
       display: 'flex',
       justifyContent: 'center',
@@ -43,6 +57,7 @@ const AppNavBar = () => {
   const history = useHistory()
   const classes = useStyles()
   const isLoggedIn = useSelector(selectIsLoggedIn())
+  const userAttributes = useSelector(selectAttributes())
   const onLoginLogoutClick = () => {
     if (isLoggedIn) {
       dispatch(loginPageContainerCreators.requestUserLogout())
@@ -79,15 +94,23 @@ const AppNavBar = () => {
             Login
           </Button>
         ) : (
-          <Button
-            className={classes.button}
-            size='large'
-            variant='outlined'
-            color='secondary'
-            onClick={onLoginLogoutClick}
-          >
-            Logout
-          </Button>
+          <div className={classes.leftOptions}>
+            <Typography
+              variant='h6'
+              className={`${classes.title} ${classes.menuButton}`}
+            >
+              {userAttributes.name}
+            </Typography>
+            <Button
+              className={classes.button}
+              size='large'
+              variant='outlined'
+              color='secondary'
+              onClick={onLoginLogoutClick}
+            >
+              Logout
+            </Button>
+          </div>
         )}
       </div>
     </AppBar>
