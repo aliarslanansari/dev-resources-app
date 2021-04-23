@@ -58,7 +58,6 @@ export const registerUserContainerReducer = (
       case registerUserContainerTypes.SUCCESS_USER_SIGN_UP:
         draft.loading = false
         draft.emailVerificationCodeSent = false
-        draft.confirmationDetails = action.payload
         return draft
       default:
         return draft

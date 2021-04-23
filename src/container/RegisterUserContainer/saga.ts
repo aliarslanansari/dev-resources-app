@@ -36,12 +36,7 @@ export function* requestSignUpConfirmation(action: AnyAction) {
     yield* call(confirmSignUp, { username, code })
     toast.success('Account Verified Successfully', toastConfigration)
     yield* call(requestLogin, action)
-    yield* put(
-      registerUserContainerCreators.successUserSignUp({
-        ...action.payload,
-        userSignupSuccess: true
-      })
-    )
+    yield* put(registerUserContainerCreators.successUserSignUp())
   } catch (error) {
     yield* put(registerUserContainerCreators.failureUserSignUp(error))
     toast.error(error.message, toastConfigration)
