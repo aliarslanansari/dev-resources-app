@@ -8,6 +8,11 @@ export const routeConfig: RouteConfig = {
     path: '/login',
     exact: true
   },
+  register: {
+    render: lazyLoader(() => import('./container/RegisterUserContainer')),
+    path: '/register',
+    exact: true
+  },
   homePage: {
     render: lazyLoader(() => import('./container/HomeContainer')),
     exact: true,

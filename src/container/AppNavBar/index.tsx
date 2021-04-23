@@ -8,6 +8,8 @@ import { selectIsLoggedIn } from '../LoginPageContainer/selectors'
 import { routeConfig } from '../../routeConfig'
 import saga from './saga'
 import { useHistory, withRouter } from 'react-router'
+import { ToastContainer, toast } from 'material-react-toastify'
+import 'material-react-toastify/dist/ReactToastify.css'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,6 +53,17 @@ const AppNavBar = () => {
 
   return (
     <AppBar position='fixed' className={classes.root}>
+      <ToastContainer
+        position='top-center'
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Typography variant='h6' className={classes.title}>
         DevResources
       </Typography>

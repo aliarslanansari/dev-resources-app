@@ -3,6 +3,17 @@ interface IUserSignInTypes {
   password: string
 }
 
+interface IUserSignup {
+  name: string
+  password: string
+  username: string
+}
+interface IUserSignupConfirmation {
+  code: string
+  username: string
+  password?: string
+}
+
 type LoginReturnType = AuthUserLoginResponseError | AuthUserLoginResponse
 
 interface ICompleteNewPassword {

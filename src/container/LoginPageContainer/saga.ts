@@ -17,15 +17,15 @@ export function* requestLogin(action: AnyAction) {
 
 export function* requestUserSignout() {
   try {
-    yield call(userSignOut)
-    yield put(loginPageContainerCreators.successUserLogout())
+    const res = yield* call(userSignOut)
+    yield* put(loginPageContainerCreators.successUserLogout(res))
   } catch (error) {
-    yield put(loginPageContainerCreators.failureUserLogout(error.message))
+    yield* put(loginPageContainerCreators.failureUserLogout(error.message))
   }
 }
 export default function* authenticatorSaga() {
-  yield takeLatest(loginPageContainerTypes.REQUEST_LOGIN, requestLogin)
-  yield takeLatest(
+  yield* takeLatest(loginPageContainerTypes.REQUEST_LOGIN, requestLogin)
+  yield* takeLatest(
     loginPageContainerTypes.REQUEST_USER_LOGOUT,
     requestUserSignout
   )

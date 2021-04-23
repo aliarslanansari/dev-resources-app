@@ -14,6 +14,7 @@ function DRButton(props: DRButtonPropsTypes) {
       color='secondary'
       onClick={onClick}
       disabled={loading}
+      {...props}
     >
       {loading && <CircularProgress color='secondary' size={'2rem'} />}
       {!loading && label}

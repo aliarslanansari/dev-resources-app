@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import LockIcon from '@material-ui/icons/Lock'
 import { makeStyles } from '@material-ui/styles'
-import { Dispatch, useEffect, useState } from 'react'
+import { Dispatch, useEffect } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { compose } from 'redux'
 // import { userSignIn } from '../../services/authServices'
@@ -92,54 +92,62 @@ const LoginPageContainer = (props: PropsFromRedux) => {
           Login from here
         </Typography>
         <Card className={classes.cardRoot}>
+          <form onSubmit={formik.handleSubmit}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                id='username'
+                name='username'
+                type='email'
+                label='Email'
+                value={formik.values.username}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.username && Boolean(formik.errors.username)
+                }
+                helperText={formik.touched.username && formik.errors.username}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <AccountCircle color='secondary' />
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <TextField
+                fullWidth
+                id='password'
+                name='password'
+                label='Password'
+                type='password'
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <LockIcon color='secondary' />
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <DRButton loading={loading} type='submit' label='Login' />
+            </FormControl>
+          </form>
           <FormControl className={classes.formControl}>
-            <TextField
-              id='username'
-              name='username'
-              label='Email'
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              error={formik.touched.username && Boolean(formik.errors.username)}
-              helperText={formik.touched.username && formik.errors.username}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <AccountCircle color='secondary' />
-                  </InputAdornment>
-                )
+            <Button
+              color='secondary'
+              variant='outlined'
+              onClick={() => {
+                history.push(routeConfig.register.path)
               }}
-            />
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <TextField
-              fullWidth
-              id='password'
-              name='password'
-              label='Password'
-              type='password'
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <LockIcon color='secondary' />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <DRButton
-              loading={loading}
-              type='submit'
-              label='Login'
-              onClick={formik.handleSubmit}
-            />
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <Button color='secondary' variant='outlined'>
+            >
               Register
             </Button>
           </FormControl>
