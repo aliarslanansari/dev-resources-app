@@ -11,7 +11,7 @@ import {
 import { routeConfig } from '../../routeConfig'
 import saga from './saga'
 import { useHistory, withRouter } from 'react-router'
-import { ToastContainer, toast } from 'material-react-toastify'
+import { ToastContainer } from 'material-react-toastify'
 import 'material-react-toastify/dist/ReactToastify.css'
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -1,10 +1,4 @@
-import {
-  Button,
-  Card,
-  InputAdornment,
-  Theme,
-  Typography
-} from '@material-ui/core'
+import { Card, InputAdornment, Theme, Typography } from '@material-ui/core'
 import FormControl from '@material-ui/core/FormControl'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import LockIcon from '@material-ui/icons/Lock'
@@ -29,7 +23,6 @@ import {
 import { useFormik } from 'formik'
 import { registerUserContainerCreators } from './reducer'
 import { selectIsLoggedIn } from '../LoginPageContainer/selectors'
-import { omit } from 'lodash'
 
 const useStyles = makeStyles((theme: Theme) => ({
   titleText: {
