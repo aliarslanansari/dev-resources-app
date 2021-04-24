@@ -11,6 +11,9 @@ export const createPost = /* GraphQL */ `
       id
       title
       description
+      createdAt
+      updatedAt
+      owner
       comments {
         items {
           id
@@ -32,12 +35,9 @@ export const createPost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
-`;
+`
 export const updatePost = /* GraphQL */ `
   mutation UpdatePost(
     $input: UpdatePostInput!
@@ -47,6 +47,9 @@ export const updatePost = /* GraphQL */ `
       id
       title
       description
+      createdAt
+      updatedAt
+      owner
       comments {
         items {
           id
@@ -68,12 +71,9 @@ export const updatePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
-`;
+`
 export const deletePost = /* GraphQL */ `
   mutation DeletePost(
     $input: DeletePostInput!
@@ -83,6 +83,9 @@ export const deletePost = /* GraphQL */ `
       id
       title
       description
+      createdAt
+      updatedAt
+      owner
       comments {
         items {
           id
@@ -104,12 +107,9 @@ export const deletePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
-`;
+`
 export const createComment = /* GraphQL */ `
   mutation CreateComment(
     $input: CreateCommentInput!
@@ -118,27 +118,27 @@ export const createComment = /* GraphQL */ `
     createComment(input: $input, condition: $condition) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      content
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`
 export const updateComment = /* GraphQL */ `
   mutation UpdateComment(
     $input: UpdateCommentInput!
@@ -147,27 +147,27 @@ export const updateComment = /* GraphQL */ `
     updateComment(input: $input, condition: $condition) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      content
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`
 export const deleteComment = /* GraphQL */ `
   mutation DeleteComment(
     $input: DeleteCommentInput!
@@ -176,27 +176,27 @@ export const deleteComment = /* GraphQL */ `
     deleteComment(input: $input, condition: $condition) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      content
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`
 export const createUpVotes = /* GraphQL */ `
   mutation CreateUpVotes(
     $input: CreateUpVotesInput!
@@ -205,26 +205,26 @@ export const createUpVotes = /* GraphQL */ `
     createUpVotes(input: $input, condition: $condition) {
       id
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`
 export const updateUpVotes = /* GraphQL */ `
   mutation UpdateUpVotes(
     $input: UpdateUpVotesInput!
@@ -233,26 +233,26 @@ export const updateUpVotes = /* GraphQL */ `
     updateUpVotes(input: $input, condition: $condition) {
       id
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`
 export const deleteUpVotes = /* GraphQL */ `
   mutation DeleteUpVotes(
     $input: DeleteUpVotesInput!
@@ -261,23 +261,23 @@ export const deleteUpVotes = /* GraphQL */ `
     deleteUpVotes(input: $input, condition: $condition) {
       id
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`

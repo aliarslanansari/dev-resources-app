@@ -56,6 +56,10 @@ export const createAndConfigureAppSyncClient = (awsConfig: any) => {
     type: authType,
     jwtToken: jwtToken
   }
+  const iamAuthConfig = {
+    type: authType,
+    jwtToken: jwtToken
+  }
 
   appSyncClient = new AWSAppSyncClient(
     {
@@ -71,6 +75,12 @@ export const createAndConfigureAppSyncClient = (awsConfig: any) => {
         createAppSyncLink({
           url: graphQlEndPoint,
           auth: authConfig,
+          region: region,
+          complexObjectsCredentials: () => Auth.currentCredentials()
+        }),
+        createAppSyncLink({
+          url: graphQlEndPoint,
+          auth: iamAuthConfig,
           region: region,
           complexObjectsCredentials: () => Auth.currentCredentials()
         })

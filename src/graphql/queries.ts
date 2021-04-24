@@ -2,12 +2,40 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const listPosts = /* GraphQL */ `
+  query ListPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        createdAt
+        updatedAt
+        owner
+        comments {
+          nextToken
+        }
+        upVotes {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`
 export const getPost = /* GraphQL */ `
   query GetPost($id: ID!) {
     getPost(id: $id) {
       id
       title
       description
+      createdAt
+      updatedAt
+      owner
       comments {
         items {
           id
@@ -29,63 +57,35 @@ export const getPost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
-`;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        title
-        description
-        comments {
-          nextToken
-        }
-        upVotes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
+`
 export const getComment = /* GraphQL */ `
   query GetComment($id: ID!) {
     getComment(id: $id) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      content
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`
 export const listComments = /* GraphQL */ `
   query ListComments(
     $filter: ModelCommentFilterInput
@@ -96,6 +96,9 @@ export const listComments = /* GraphQL */ `
       items {
         id
         postID
+        content
+        createdAt
+        updatedAt
         post {
           id
           title
@@ -104,40 +107,37 @@ export const listComments = /* GraphQL */ `
           updatedAt
           owner
         }
-        content
-        createdAt
-        updatedAt
         owner
       }
       nextToken
     }
   }
-`;
+`
 export const getUpVotes = /* GraphQL */ `
   query GetUpVotes($id: ID!) {
     getUpVotes(id: $id) {
       id
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
-`;
+`
 export const listUpVotess = /* GraphQL */ `
   query ListUpVotess(
     $filter: ModelUpVotesFilterInput
@@ -148,6 +148,8 @@ export const listUpVotess = /* GraphQL */ `
       items {
         id
         postID
+        createdAt
+        updatedAt
         post {
           id
           title
@@ -156,11 +158,9 @@ export const listUpVotess = /* GraphQL */ `
           updatedAt
           owner
         }
-        createdAt
-        updatedAt
         owner
       }
       nextToken
     }
   }
-`;
+`

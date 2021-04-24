@@ -60,11 +60,11 @@ export type Post = {
   id?: string
   title?: string
   description?: string
-  comments?: ModelCommentConnection
-  upVotes?: ModelUpVotesConnection
   createdAt?: string
   updatedAt?: string
   owner?: string | null
+  comments?: ModelCommentConnection
+  upVotes?: ModelUpVotesConnection
 }
 
 export type ModelCommentConnection = {
@@ -77,10 +77,10 @@ export type Comment = {
   __typename: 'Comment'
   id?: string
   postID?: string
-  post?: Post
   content?: string
   createdAt?: string
   updatedAt?: string
+  post?: Post
   owner?: string | null
 }
 
@@ -94,9 +94,9 @@ export type UpVotes = {
   __typename: 'UpVotes'
   id?: string
   postID?: string
-  post?: Post
   createdAt?: string
   updatedAt?: string
+  post?: Post
   owner?: string | null
 }
 
@@ -214,6 +214,9 @@ export type CreatePostMutation = {
     id: string
     title: string
     description: string
+    createdAt: string
+    updatedAt: string
+    owner?: string | null
     comments?: {
       __typename: 'ModelCommentConnection'
       items?: Array<{
@@ -239,9 +242,6 @@ export type CreatePostMutation = {
       } | null> | null
       nextToken?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
   } | null
 }
 
@@ -256,6 +256,9 @@ export type UpdatePostMutation = {
     id: string
     title: string
     description: string
+    createdAt: string
+    updatedAt: string
+    owner?: string | null
     comments?: {
       __typename: 'ModelCommentConnection'
       items?: Array<{
@@ -281,9 +284,6 @@ export type UpdatePostMutation = {
       } | null> | null
       nextToken?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
   } | null
 }
 
@@ -298,6 +298,9 @@ export type DeletePostMutation = {
     id: string
     title: string
     description: string
+    createdAt: string
+    updatedAt: string
+    owner?: string | null
     comments?: {
       __typename: 'ModelCommentConnection'
       items?: Array<{
@@ -323,9 +326,6 @@ export type DeletePostMutation = {
       } | null> | null
       nextToken?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
   } | null
 }
 
@@ -339,11 +339,17 @@ export type CreateCommentMutation = {
     __typename: 'Comment'
     id: string
     postID: string
+    content: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -352,13 +358,7 @@ export type CreateCommentMutation = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    content: string
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
@@ -373,11 +373,17 @@ export type UpdateCommentMutation = {
     __typename: 'Comment'
     id: string
     postID: string
+    content: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -386,13 +392,7 @@ export type UpdateCommentMutation = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    content: string
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
@@ -407,11 +407,17 @@ export type DeleteCommentMutation = {
     __typename: 'Comment'
     id: string
     postID: string
+    content: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -420,13 +426,7 @@ export type DeleteCommentMutation = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    content: string
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
@@ -441,11 +441,16 @@ export type CreateUpVotesMutation = {
     __typename: 'UpVotes'
     id: string
     postID: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -454,12 +459,7 @@ export type CreateUpVotesMutation = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
@@ -474,11 +474,16 @@ export type UpdateUpVotesMutation = {
     __typename: 'UpVotes'
     id: string
     postID: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -487,12 +492,7 @@ export type UpdateUpVotesMutation = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
@@ -507,11 +507,16 @@ export type DeleteUpVotesMutation = {
     __typename: 'UpVotes'
     id: string
     postID: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -520,13 +525,38 @@ export type DeleteUpVotesMutation = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
+    } | null
+    owner?: string | null
+  } | null
+}
+
+export type ListPostsQueryVariables = {
+  filter?: ModelPostFilterInput | null
+  limit?: number | null
+  nextToken?: string | null
+}
+
+export type ListPostsQuery = {
+  listPosts?: {
+    __typename: 'ModelPostConnection'
+    items?: Array<{
+      __typename: 'Post'
+      id: string
+      title: string
+      description: string
       createdAt: string
       updatedAt: string
       owner?: string | null
-    } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
+      comments?: {
+        __typename: 'ModelCommentConnection'
+        nextToken?: string | null
+      } | null
+      upVotes?: {
+        __typename: 'ModelUpVotesConnection'
+        nextToken?: string | null
+      } | null
+    } | null> | null
+    nextToken?: string | null
   } | null
 }
 
@@ -540,6 +570,9 @@ export type GetPostQuery = {
     id: string
     title: string
     description: string
+    createdAt: string
+    updatedAt: string
+    owner?: string | null
     comments?: {
       __typename: 'ModelCommentConnection'
       items?: Array<{
@@ -565,57 +598,6 @@ export type GetPostQuery = {
       } | null> | null
       nextToken?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
-  } | null
-}
-
-export type ListPostsQueryVariables = {
-  filter?: ModelPostFilterInput | null
-  limit?: number | null
-  nextToken?: string | null
-}
-
-export type ListPostQueryItemsTypes = Array<{
-  __typename: 'Post'
-  id: string
-  title: string
-  description: string
-  comments?: {
-    __typename: 'ModelCommentConnection'
-    nextToken?: string | null
-  } | null
-  upVotes?: {
-    __typename: 'ModelUpVotesConnection'
-    nextToken?: string | null
-  } | null
-  createdAt: string
-  updatedAt: string
-  owner?: string | null
-} | null> | null
-
-export type ListPostsQuery = {
-  listPosts?: {
-    __typename: 'ModelPostConnection'
-    items?: Array<{
-      __typename: 'Post'
-      id: string
-      title: string
-      description: string
-      comments?: {
-        __typename: 'ModelCommentConnection'
-        nextToken?: string | null
-      } | null
-      upVotes?: {
-        __typename: 'ModelUpVotesConnection'
-        nextToken?: string | null
-      } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
-    } | null> | null
-    nextToken?: string | null
   } | null
 }
 
@@ -628,11 +610,17 @@ export type GetCommentQuery = {
     __typename: 'Comment'
     id: string
     postID: string
+    content: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -641,13 +629,7 @@ export type GetCommentQuery = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    content: string
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
@@ -665,6 +647,9 @@ export type ListCommentsQuery = {
       __typename: 'Comment'
       id: string
       postID: string
+      content: string
+      createdAt: string
+      updatedAt: string
       post?: {
         __typename: 'Post'
         id: string
@@ -674,9 +659,6 @@ export type ListCommentsQuery = {
         updatedAt: string
         owner?: string | null
       } | null
-      content: string
-      createdAt: string
-      updatedAt: string
       owner?: string | null
     } | null> | null
     nextToken?: string | null
@@ -692,11 +674,16 @@ export type GetUpVotesQuery = {
     __typename: 'UpVotes'
     id: string
     postID: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -705,12 +692,7 @@ export type GetUpVotesQuery = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
@@ -728,6 +710,8 @@ export type ListUpVotessQuery = {
       __typename: 'UpVotes'
       id: string
       postID: string
+      createdAt: string
+      updatedAt: string
       post?: {
         __typename: 'Post'
         id: string
@@ -737,8 +721,6 @@ export type ListUpVotessQuery = {
         updatedAt: string
         owner?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
       owner?: string | null
     } | null> | null
     nextToken?: string | null
@@ -746,7 +728,7 @@ export type ListUpVotessQuery = {
 }
 
 export type OnCreatePostSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnCreatePostSubscription = {
@@ -755,6 +737,9 @@ export type OnCreatePostSubscription = {
     id: string
     title: string
     description: string
+    createdAt: string
+    updatedAt: string
+    owner?: string | null
     comments?: {
       __typename: 'ModelCommentConnection'
       items?: Array<{
@@ -780,14 +765,11 @@ export type OnCreatePostSubscription = {
       } | null> | null
       nextToken?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
   } | null
 }
 
 export type OnUpdatePostSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnUpdatePostSubscription = {
@@ -796,6 +778,9 @@ export type OnUpdatePostSubscription = {
     id: string
     title: string
     description: string
+    createdAt: string
+    updatedAt: string
+    owner?: string | null
     comments?: {
       __typename: 'ModelCommentConnection'
       items?: Array<{
@@ -821,14 +806,11 @@ export type OnUpdatePostSubscription = {
       } | null> | null
       nextToken?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
   } | null
 }
 
 export type OnDeletePostSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnDeletePostSubscription = {
@@ -837,6 +819,9 @@ export type OnDeletePostSubscription = {
     id: string
     title: string
     description: string
+    createdAt: string
+    updatedAt: string
+    owner?: string | null
     comments?: {
       __typename: 'ModelCommentConnection'
       items?: Array<{
@@ -862,14 +847,11 @@ export type OnDeletePostSubscription = {
       } | null> | null
       nextToken?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
-    owner?: string | null
   } | null
 }
 
 export type OnCreateCommentSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnCreateCommentSubscription = {
@@ -877,11 +859,17 @@ export type OnCreateCommentSubscription = {
     __typename: 'Comment'
     id: string
     postID: string
+    content: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -890,19 +878,13 @@ export type OnCreateCommentSubscription = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    content: string
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
 
 export type OnUpdateCommentSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnUpdateCommentSubscription = {
@@ -910,11 +892,17 @@ export type OnUpdateCommentSubscription = {
     __typename: 'Comment'
     id: string
     postID: string
+    content: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -923,19 +911,13 @@ export type OnUpdateCommentSubscription = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    content: string
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
 
 export type OnDeleteCommentSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnDeleteCommentSubscription = {
@@ -943,11 +925,17 @@ export type OnDeleteCommentSubscription = {
     __typename: 'Comment'
     id: string
     postID: string
+    content: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -956,19 +944,13 @@ export type OnDeleteCommentSubscription = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    content: string
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
 
 export type OnCreateUpVotesSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnCreateUpVotesSubscription = {
@@ -976,11 +958,16 @@ export type OnCreateUpVotesSubscription = {
     __typename: 'UpVotes'
     id: string
     postID: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -989,18 +976,13 @@ export type OnCreateUpVotesSubscription = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
 
 export type OnUpdateUpVotesSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnUpdateUpVotesSubscription = {
@@ -1008,11 +990,16 @@ export type OnUpdateUpVotesSubscription = {
     __typename: 'UpVotes'
     id: string
     postID: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -1021,18 +1008,13 @@ export type OnUpdateUpVotesSubscription = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }
 
 export type OnDeleteUpVotesSubscriptionVariables = {
-  owner?: string
+  owner?: string | null
 }
 
 export type OnDeleteUpVotesSubscription = {
@@ -1040,11 +1022,16 @@ export type OnDeleteUpVotesSubscription = {
     __typename: 'UpVotes'
     id: string
     postID: string
+    createdAt: string
+    updatedAt: string
     post?: {
       __typename: 'Post'
       id: string
       title: string
       description: string
+      createdAt: string
+      updatedAt: string
+      owner?: string | null
       comments?: {
         __typename: 'ModelCommentConnection'
         nextToken?: string | null
@@ -1053,12 +1040,7 @@ export type OnDeleteUpVotesSubscription = {
         __typename: 'ModelUpVotesConnection'
         nextToken?: string | null
       } | null
-      createdAt: string
-      updatedAt: string
-      owner?: string | null
     } | null
-    createdAt: string
-    updatedAt: string
     owner?: string | null
   } | null
 }

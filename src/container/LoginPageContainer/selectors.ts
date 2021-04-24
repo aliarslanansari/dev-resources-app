@@ -2,23 +2,33 @@ import { createSelector } from 'reselect'
 import { initialState } from './reducer'
 import get from 'lodash/get'
 
-const selectAuthenticatorDomain = (state: any) =>
+const selectLoginContainer = (state: any) =>
   state.loginPageContainer || initialState
 
 export const selectAttributes = () =>
   createSelector(
-    selectAuthenticatorDomain,
+    selectLoginContainer,
     (substate: any) => get(substate, 'attributes') as UserAttributes
   )
 
 export const selectIsLoggedIn = () =>
   createSelector(
-    selectAuthenticatorDomain,
+    selectLoginContainer,
     (substate: any) => get(substate, 'isLoggedIn') as boolean
   )
 
 export const selectLoading = () =>
   createSelector(
-    selectAuthenticatorDomain,
+    selectLoginContainer,
     (substate: any) => get(substate, 'loading') as boolean
   )
+
+// export const selectIsTokenExpired = () =>
+//   createSelector(selectLoginContainer, (subState) => {
+//     const exp = get(
+//       subState,
+//       'user.signInUserSession.idToken.payload.exp',
+//       undefined
+//     )
+//     return isTokenExpired(exp)
+//   })
