@@ -69,3 +69,21 @@ interface Pool {
 interface Storage {
   [key: string]: string
 }
+
+export type ListPostQueryItemsTypes = Array<{
+  __typename: 'Post'
+  id: string
+  title: string
+  description: string
+  createdAt: string
+  updatedAt: string
+  owner?: string | null
+  comments?: {
+    __typename: 'ModelCommentConnection'
+    nextToken?: string | null
+  } | null
+  upVotes?: {
+    __typename: 'ModelUpVotesConnection'
+    nextToken?: string | null
+  } | null
+} | null> | null

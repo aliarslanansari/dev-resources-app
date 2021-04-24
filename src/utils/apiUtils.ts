@@ -1,5 +1,5 @@
 import { ApolloCache } from 'apollo-cache'
-import AWSAppSyncClient, { createAppSyncLink } from 'aws-appsync'
+import AWSAppSyncClient, { AUTH_TYPE, createAppSyncLink } from 'aws-appsync'
 import Amplify, { Auth } from 'aws-amplify'
 import { ApolloLink } from 'apollo-link'
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
@@ -46,7 +46,8 @@ export const createAndConfigureAppSyncClient = (awsConfig: any) => {
   const {
     aws_appsync_graphqlEndpoint: graphQlEndPoint,
     aws_appsync_region: region,
-    aws_appsync_authenticationType: authType
+    aws_appsync_authenticationType: authType,
+    aws_appsync_apiKey
   } = awsConfig
 
   const jwtToken = async () =>
@@ -56,10 +57,32 @@ export const createAndConfigureAppSyncClient = (awsConfig: any) => {
     type: authType,
     jwtToken: jwtToken
   }
-  const iamAuthConfig = {
-    type: authType,
-    jwtToken: jwtToken
-  }
+
+  const apiAuthLink = createAppSyncLink({
+    url: graphQlEndPoint,
+    region: region,
+    auth: {
+      type: 'API_KEY',
+      apiKey: aws_appsync_apiKey
+    },
+    complexObjectsCredentials: () => Auth.currentCredentials()
+  })
+
+  const cognitoUserAuthClient = createAppSyncLink({
+    url: graphQlEndPoint,
+    auth: authConfig,
+    region: region,
+    complexObjectsCredentials: () => Auth.currentCredentials()
+  })
+
+  // decide which the proper link from above to use (directional link)
+  const awsLink = ApolloLink.split(
+    (operation) => {
+      return operation.operationName === `ListPosts`
+    },
+    cognitoUserAuthClient,
+    apiAuthLink
+  )
 
   appSyncClient = new AWSAppSyncClient(
     {
@@ -71,20 +94,7 @@ export const createAndConfigureAppSyncClient = (awsConfig: any) => {
     {
       //@ts-ignore
       cache: new InMemoryCache() as ApolloCache<NormalizedCacheObject>,
-      link: ApolloLink.from([
-        createAppSyncLink({
-          url: graphQlEndPoint,
-          auth: authConfig,
-          region: region,
-          complexObjectsCredentials: () => Auth.currentCredentials()
-        }),
-        createAppSyncLink({
-          url: graphQlEndPoint,
-          auth: iamAuthConfig,
-          region: region,
-          complexObjectsCredentials: () => Auth.currentCredentials()
-        })
-      ])
+      link: ApolloLink.from([awsLink])
     }
   )
 
