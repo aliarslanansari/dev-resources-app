@@ -78,10 +78,10 @@ export const createAndConfigureAppSyncClient = (awsConfig: any) => {
   // decide which the proper link from above to use (directional link)
   const awsLink = ApolloLink.split(
     (operation) => {
-      return operation.operationName === `ListPosts`
+      return operation.operationName.includes('List')
     },
-    cognitoUserAuthClient,
-    apiAuthLink
+    apiAuthLink,
+    cognitoUserAuthClient
   )
 
   appSyncClient = new AWSAppSyncClient(
