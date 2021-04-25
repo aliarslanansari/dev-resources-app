@@ -6,7 +6,7 @@ export const initialState = {
   allPosts: [],
   currentUsersPosts: [],
   loading: false,
-  error: ''
+  error: null
 }
 
 export const {
@@ -30,6 +30,7 @@ export const registerUserContainerReducer = (
       case HomeContainerTypes.SUCCESS_FETCH_POSTS:
         draft.loading = false
         draft.allPosts = action.payload
+        draft.error = null
         return draft
       case HomeContainerTypes.FAILURE_FETCH_POSTS:
         draft.loading = false

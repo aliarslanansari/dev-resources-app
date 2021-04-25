@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
-      color: theme.palette.secondary.main
+      color: theme.palette.secondary.main,
+      cursor: 'pointer'
     },
     button: {
       color: theme.palette.secondary.main
@@ -79,7 +80,15 @@ const AppNavBar = () => {
         draggable
         pauseOnHover
       />
-      <Typography variant='h6' className={classes.title}>
+      <Typography
+        variant='h6'
+        className={classes.title}
+        onClick={() => {
+          if (history.location.pathname !== routeConfig.homePage?.path) {
+            history.push(routeConfig.homePage?.path)
+          }
+        }}
+      >
         DevResources
       </Typography>
       <div>

@@ -25,6 +25,7 @@ import saga from './saga'
 import { selectIsLoggedIn, selectLoading } from './selectors'
 import { validationSchema } from './formikValidation'
 import { useFormik } from 'formik'
+import { useQuery } from '../../utils/hooks'
 
 const useStyles = makeStyles((theme: Theme) => ({
   titleText: {
@@ -64,10 +65,11 @@ const LoginPageContainer = (props: PropsFromRedux) => {
   const classes = useStyles()
   const history = useHistory()
   const { isLoggedIn, dispatchRequestLogin, loading } = props
-
+  const query = useQuery()
+  const redirectURL = query.get('redirectURL')
   useEffect(() => {
     if (isLoggedIn) {
-      history.push(routeConfig.homePage?.path || '/')
+      history.push(redirectURL || routeConfig.homePage?.path || '/')
     }
   }, [isLoggedIn])
 

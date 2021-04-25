@@ -18,6 +18,12 @@ export const routeConfig: RouteConfig = {
     exact: true,
     path: '/'
   },
+  createPost: {
+    render: lazyLoader(() => import('./container/CreatePostContainer')),
+    exact: true,
+    path: '/post/create',
+    isProtected: true
+  },
   notFoundPage: {
     render: lazyLoader(() => import('./components/PageNotFound')),
     path: '/*'

@@ -11,6 +11,8 @@ export const createPost = /* GraphQL */ `
       id
       title
       description
+      imageName
+      url
       createdAt
       updatedAt
       owner
@@ -37,7 +39,7 @@ export const createPost = /* GraphQL */ `
       }
     }
   }
-`
+`;
 export const updatePost = /* GraphQL */ `
   mutation UpdatePost(
     $input: UpdatePostInput!
@@ -47,6 +49,8 @@ export const updatePost = /* GraphQL */ `
       id
       title
       description
+      imageName
+      url
       createdAt
       updatedAt
       owner
@@ -73,7 +77,7 @@ export const updatePost = /* GraphQL */ `
       }
     }
   }
-`
+`;
 export const deletePost = /* GraphQL */ `
   mutation DeletePost(
     $input: DeletePostInput!
@@ -83,6 +87,8 @@ export const deletePost = /* GraphQL */ `
       id
       title
       description
+      imageName
+      url
       createdAt
       updatedAt
       owner
@@ -109,7 +115,7 @@ export const deletePost = /* GraphQL */ `
       }
     }
   }
-`
+`;
 export const createComment = /* GraphQL */ `
   mutation CreateComment(
     $input: CreateCommentInput!
@@ -125,6 +131,8 @@ export const createComment = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -138,7 +146,7 @@ export const createComment = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const updateComment = /* GraphQL */ `
   mutation UpdateComment(
     $input: UpdateCommentInput!
@@ -154,6 +162,8 @@ export const updateComment = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -167,7 +177,7 @@ export const updateComment = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const deleteComment = /* GraphQL */ `
   mutation DeleteComment(
     $input: DeleteCommentInput!
@@ -183,6 +193,8 @@ export const deleteComment = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -196,7 +208,7 @@ export const deleteComment = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const createUpVotes = /* GraphQL */ `
   mutation CreateUpVotes(
     $input: CreateUpVotesInput!
@@ -211,6 +223,8 @@ export const createUpVotes = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -224,7 +238,7 @@ export const createUpVotes = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const updateUpVotes = /* GraphQL */ `
   mutation UpdateUpVotes(
     $input: UpdateUpVotesInput!
@@ -239,6 +253,8 @@ export const updateUpVotes = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -252,7 +268,7 @@ export const updateUpVotes = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const deleteUpVotes = /* GraphQL */ `
   mutation DeleteUpVotes(
     $input: DeleteUpVotesInput!
@@ -267,6 +283,8 @@ export const deleteUpVotes = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -280,4 +298,4 @@ export const deleteUpVotes = /* GraphQL */ `
       owner
     }
   }
-`
+`;

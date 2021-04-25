@@ -1,8 +1,8 @@
 import { ApolloCache } from 'apollo-cache'
-import AWSAppSyncClient, { AUTH_TYPE, createAppSyncLink } from 'aws-appsync'
-import Amplify, { Auth } from 'aws-amplify'
-import { ApolloLink } from 'apollo-link'
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
+import { ApolloLink } from 'apollo-link'
+import Amplify, { Auth } from 'aws-amplify'
+import AWSAppSyncClient, { createAppSyncLink } from 'aws-appsync'
 import gql from 'graphql-tag'
 
 let appSyncClient: any = null
@@ -78,7 +78,10 @@ export const createAndConfigureAppSyncClient = (awsConfig: any) => {
   // decide which the proper link from above to use (directional link)
   const awsLink = ApolloLink.split(
     (operation) => {
-      return operation.operationName.includes('List')
+      return (
+        operation.operationName.includes('List') ||
+        operation.operationName.includes('Get')
+      )
     },
     apiAuthLink,
     cognitoUserAuthClient

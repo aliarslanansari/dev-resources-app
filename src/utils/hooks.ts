@@ -23,3 +23,7 @@ export function useWindowSize() {
   }, [])
   return windowSize
 }
+
+export function useQuery() {
+  return new URLSearchParams(window.location.search)
+}

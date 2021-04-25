@@ -13,6 +13,8 @@ export const listPosts = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -26,13 +28,15 @@ export const listPosts = /* GraphQL */ `
       nextToken
     }
   }
-`
+`;
 export const getPost = /* GraphQL */ `
   query GetPost($id: ID!) {
     getPost(id: $id) {
       id
       title
       description
+      imageName
+      url
       createdAt
       updatedAt
       owner
@@ -59,7 +63,7 @@ export const getPost = /* GraphQL */ `
       }
     }
   }
-`
+`;
 export const getComment = /* GraphQL */ `
   query GetComment($id: ID!) {
     getComment(id: $id) {
@@ -72,6 +76,8 @@ export const getComment = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -85,7 +91,7 @@ export const getComment = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const listComments = /* GraphQL */ `
   query ListComments(
     $filter: ModelCommentFilterInput
@@ -103,6 +109,8 @@ export const listComments = /* GraphQL */ `
           id
           title
           description
+          imageName
+          url
           createdAt
           updatedAt
           owner
@@ -112,7 +120,7 @@ export const listComments = /* GraphQL */ `
       nextToken
     }
   }
-`
+`;
 export const getUpVotes = /* GraphQL */ `
   query GetUpVotes($id: ID!) {
     getUpVotes(id: $id) {
@@ -124,6 +132,8 @@ export const getUpVotes = /* GraphQL */ `
         id
         title
         description
+        imageName
+        url
         createdAt
         updatedAt
         owner
@@ -137,7 +147,7 @@ export const getUpVotes = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const listUpVotess = /* GraphQL */ `
   query ListUpVotess(
     $filter: ModelUpVotesFilterInput
@@ -154,6 +164,8 @@ export const listUpVotess = /* GraphQL */ `
           id
           title
           description
+          imageName
+          url
           createdAt
           updatedAt
           owner
@@ -163,4 +175,4 @@ export const listUpVotess = /* GraphQL */ `
       nextToken
     }
   }
-`
+`;

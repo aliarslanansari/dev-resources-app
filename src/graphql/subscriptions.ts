@@ -3,11 +3,16 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost($owner: String!) {
+  subscription OnCreatePost($owner: String) {
     onCreatePost(owner: $owner) {
       id
       title
       description
+      imageName
+      url
+      createdAt
+      updatedAt
+      owner
       comments {
         items {
           id
@@ -29,18 +34,20 @@ export const onCreatePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost($owner: String!) {
+  subscription OnUpdatePost($owner: String) {
     onUpdatePost(owner: $owner) {
       id
       title
       description
+      imageName
+      url
+      createdAt
+      updatedAt
+      owner
       comments {
         items {
           id
@@ -62,18 +69,20 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost($owner: String!) {
+  subscription OnDeletePost($owner: String) {
     onDeletePost(owner: $owner) {
       id
       title
       description
+      imageName
+      url
+      createdAt
+      updatedAt
+      owner
       comments {
         items {
           id
@@ -95,161 +104,170 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
 export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment($owner: String!) {
+  subscription OnCreateComment($owner: String) {
     onCreateComment(owner: $owner) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        imageName
+        url
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      content
-      createdAt
-      updatedAt
       owner
     }
   }
 `;
 export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment($owner: String!) {
+  subscription OnUpdateComment($owner: String) {
     onUpdateComment(owner: $owner) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        imageName
+        url
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      content
-      createdAt
-      updatedAt
       owner
     }
   }
 `;
 export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment($owner: String!) {
+  subscription OnDeleteComment($owner: String) {
     onDeleteComment(owner: $owner) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        imageName
+        url
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      content
-      createdAt
-      updatedAt
       owner
     }
   }
 `;
 export const onCreateUpVotes = /* GraphQL */ `
-  subscription OnCreateUpVotes($owner: String!) {
+  subscription OnCreateUpVotes($owner: String) {
     onCreateUpVotes(owner: $owner) {
       id
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        imageName
+        url
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
 `;
 export const onUpdateUpVotes = /* GraphQL */ `
-  subscription OnUpdateUpVotes($owner: String!) {
+  subscription OnUpdateUpVotes($owner: String) {
     onUpdateUpVotes(owner: $owner) {
       id
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        imageName
+        url
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }
 `;
 export const onDeleteUpVotes = /* GraphQL */ `
-  subscription OnDeleteUpVotes($owner: String!) {
+  subscription OnDeleteUpVotes($owner: String) {
     onDeleteUpVotes(owner: $owner) {
       id
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         description
+        imageName
+        url
+        createdAt
+        updatedAt
+        owner
         comments {
           nextToken
         }
         upVotes {
           nextToken
         }
-        createdAt
-        updatedAt
-        owner
       }
-      createdAt
-      updatedAt
       owner
     }
   }

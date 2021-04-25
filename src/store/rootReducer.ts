@@ -6,12 +6,15 @@ import loginPageContainer, {
 } from '../container/LoginPageContainer/reducer'
 import registerUserContainerReducer from '../container/RegisterUserContainer/reducer'
 import homeContainerReducer from '../container/HomeContainer/reducer'
+import createPostContainer from '../container/CreatePostContainer/reducer'
+
 export default function createReducer() {
   const appReducer = combineReducers({
     router: connectRouter(history),
     loginPageContainer,
     registerUserContainerReducer,
-    homeContainerReducer
+    homeContainerReducer,
+    createPostContainer
   })
 
   const rootReducer = (state: any, action: any) => {

@@ -70,11 +70,13 @@ interface Storage {
   [key: string]: string
 }
 
-export type ListPostQueryItemsTypes = Array<{
+type ListPostQueryItemsTypes = Array<{
   __typename: 'Post'
   id: string
   title: string
   description: string
+  imageName?: string | null
+  url: string
   createdAt: string
   updatedAt: string
   owner?: string | null
