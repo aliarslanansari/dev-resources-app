@@ -14,18 +14,22 @@ const Routes = (props: RoutePropsTypes) => {
   return (
     <Switch>
       {Object.keys(routeConfig).map((routeKey, index) => {
-        return routeConfig[routeKey].isProtected && !isLoggedIn ? (
-          <Redirect
-            to={`${routeConfig.login.path}?redirectURL=${routeConfig[routeKey].path}`}
-          />
-        ) : (
-          <Route
-            exact={routeConfig[routeKey].exact}
-            key={index}
-            path={routeConfig[routeKey].path}
-            render={routeConfig[routeKey].render}
-          />
-        )
+        if (routeConfig[routeKey].isProtected && !isLoggedIn) {
+          return (
+            <Redirect
+              to={`${routeConfig.login.path}?redirectURL=${routeConfig[routeKey].path}`}
+            />
+          )
+        } else {
+          return (
+            <Route
+              exact={routeConfig[routeKey].exact}
+              key={index}
+              path={routeConfig[routeKey].path}
+              render={routeConfig[routeKey].render}
+            />
+          )
+        }
       })}
     </Switch>
   )

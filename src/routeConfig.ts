@@ -3,6 +3,11 @@ import { RouteConfig } from './types'
 import lazyLoader from './utils/lazyLoader'
 
 export const routeConfig: RouteConfig = {
+  post: {
+    render: lazyLoader(() => import('./container/PostDetails')),
+    exact: true,
+    path: '/post/:postId'
+  },
   login: {
     render: lazyLoader(() => import('./container/LoginPageContainer')),
     path: '/login',
@@ -21,13 +26,8 @@ export const routeConfig: RouteConfig = {
   createPost: {
     render: lazyLoader(() => import('./container/CreatePostContainer')),
     exact: true,
-    path: '/post/create',
+    path: '/create-post',
     isProtected: true
-  },
-  post: {
-    render: lazyLoader(() => import('./container/PostDetails')),
-    exact: true,
-    path: '/post/:postId'
   },
   notFoundPage: {
     render: lazyLoader(() => import('./components/PageNotFound')),
