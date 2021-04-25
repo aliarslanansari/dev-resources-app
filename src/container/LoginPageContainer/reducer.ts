@@ -27,7 +27,6 @@ export const {
   failureUserLogout: ['payload']
 })
 
-/* eslint-disable default-case, no-param-reassign */
 export const loginPageContainer = (state = initialState, action: AnyAction) =>
   produce(state, (draft) => {
     switch (action.type) {

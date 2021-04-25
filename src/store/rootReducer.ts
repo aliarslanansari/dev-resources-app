@@ -7,6 +7,7 @@ import loginPageContainer, {
 import registerUserContainerReducer from '../container/RegisterUserContainer/reducer'
 import homeContainerReducer from '../container/HomeContainer/reducer'
 import createPostContainer from '../container/CreatePostContainer/reducer'
+import postDetailsContainer from '../container/PostDetails/reducer'
 
 export default function createReducer() {
   const appReducer = combineReducers({
@@ -14,7 +15,8 @@ export default function createReducer() {
     loginPageContainer,
     registerUserContainerReducer,
     homeContainerReducer,
-    createPostContainer
+    createPostContainer,
+    postDetailsContainer
   })
 
   const rootReducer = (state: any, action: any) => {

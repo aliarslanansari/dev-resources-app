@@ -82,6 +82,26 @@ type ListPostQueryItemsTypes = {
   owner?: string | null
   comments?: {
     __typename: 'ModelCommentConnection'
+    items?: Array<{
+      __typename: 'Comment'
+      id: string
+      postID: string
+      content: string
+      createdAt: string
+      updatedAt: string
+      post?: {
+        __typename: 'Post'
+        id: string
+        title: string
+        description: string
+        imageName?: string | null
+        url: string
+        createdAt: string
+        updatedAt: string
+        owner?: string | null
+      } | null
+      owner?: string | null
+    }>
     nextToken?: string | null
   } | null
   upVotes?: {

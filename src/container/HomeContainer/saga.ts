@@ -22,15 +22,15 @@ export function* fetchPostByIdSaga(action: AnyAction) {
   try {
     const post = yield* select(selectPostById(action.payload.postId))
     const allPost = yield* select(selectAllPosts())
+    const res = yield* call(fetchPostById, { id: action.payload.postId })
+    const fetchedPost = get(res, 'data.getPost', undefined)
+    let updatedPosts = allPost
     if (post) {
-      yield* put(HomeContainerCreators.successFetchPost(allPost))
-    } else {
-      const res = yield* call(fetchPostById, { id: action.payload.postId })
-      const fetchedPost = get(res, 'data.getPost', undefined)
-      yield* put(
-        HomeContainerCreators.successFetchPost([...allPost, fetchedPost])
-      )
+      updatedPosts = [...allPost.filter((i) => i.id !== action.payload.postId)]
     }
+    yield* put(
+      HomeContainerCreators.successFetchPost([...updatedPosts, fetchedPost])
+    )
   } catch (error) {
     toast.error(error.message, toastConfigration)
     yield* put(HomeContainerCreators.failureFetchPost(error.message))
