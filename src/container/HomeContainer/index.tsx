@@ -1,4 +1,4 @@
-import { CircularProgress, Grid } from '@material-ui/core'
+import { CircularProgress, Grid, Typography } from '@material-ui/core'
 import PageWrapper from '../../components/PageWrapper'
 import { compose } from 'redux'
 import { useHistory, withRouter } from 'react-router-dom'
@@ -59,14 +59,29 @@ const HomeContainer = ({
             <ResourceCard
               title={post?.title || ''}
               description={post?.description || ''}
+              url={post?.url || ''}
+              postId={post?.id || ''}
             />
           </Grid>
         ))}
-        {[1, 2, 3, 4, 5].map((post) => (
-          <Grid item sm={12} xs={12} md={6} lg={4} key={post}>
-            <ResourceCard title={''} description={''} skeleton />
-          </Grid>
-        ))}
+        {!allPosts?.length &&
+          loading &&
+          [1, 2, 3].map((post) => (
+            <Grid item sm={12} xs={12} md={6} lg={4} key={post}>
+              <ResourceCard
+                title={''}
+                description={''}
+                url=''
+                postId=''
+                skeleton
+              />
+            </Grid>
+          ))}
+        {!allPosts?.length && !loading && (
+          <Typography color='secondary' variant='h6' style={{ margin: 16 }}>
+            Be the first to add a resource!
+          </Typography>
+        )}
       </Grid>
     </PageWrapper>
   )

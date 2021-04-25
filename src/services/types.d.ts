@@ -70,7 +70,7 @@ interface Storage {
   [key: string]: string
 }
 
-type ListPostQueryItemsTypes = Array<{
+type ListPostQueryItemsTypes = {
   __typename: 'Post'
   id: string
   title: string
@@ -88,4 +88,4 @@ type ListPostQueryItemsTypes = Array<{
     __typename: 'ModelUpVotesConnection'
     nextToken?: string | null
   } | null
-} | null> | null
+}[]

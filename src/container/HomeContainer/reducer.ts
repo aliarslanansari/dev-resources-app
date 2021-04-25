@@ -5,6 +5,7 @@ import { produce } from 'immer'
 export const initialState = {
   allPosts: [],
   currentUsersPosts: [],
+  currentPost: [],
   loading: false,
   error: null
 }
@@ -15,7 +16,10 @@ export const {
 } = createActions({
   requestFetchPosts: ['payload'],
   successFetchPosts: ['payload'],
-  failureFetchPosts: ['payload']
+  failureFetchPosts: ['payload'],
+  requestFetchPost: ['payload'],
+  successFetchPost: ['payload'],
+  failureFetchPost: ['payload']
 })
 
 export const registerUserContainerReducer = (
@@ -33,6 +37,18 @@ export const registerUserContainerReducer = (
         draft.error = null
         return draft
       case HomeContainerTypes.FAILURE_FETCH_POSTS:
+        draft.loading = false
+        draft.error = action.payload
+        return draft
+      case HomeContainerTypes.REQUEST_FETCH_POST:
+        draft.loading = true
+        return draft
+      case HomeContainerTypes.SUCCESS_FETCH_POST:
+        draft.loading = false
+        draft.allPosts = action.payload
+        draft.error = null
+        return draft
+      case HomeContainerTypes.FAILURE_FETCH_POST:
         draft.loading = false
         draft.error = action.payload
         return draft

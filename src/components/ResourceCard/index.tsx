@@ -7,9 +7,13 @@ import {
   Theme,
   Typography
 } from '@material-ui/core'
+import LaunchIcon from '@material-ui/icons/Launch'
+import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser'
 import { Skeleton } from '@material-ui/lab'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
+import { useHistory } from 'react-router'
+import { getPostPathById } from '../../utils/common'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: (props: any) => ({
@@ -49,11 +53,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface ResourceCardPropsTypes {
   title: string
   description: string
+  url: string
   skeleton?: boolean
+  postId: string
 }
 
 const ResourceCard = (props: ResourceCardPropsTypes) => {
   const classes = useStyles(props)
+  const history = useHistory()
 
   return (
     <Card className={classes.root}>
@@ -74,9 +81,38 @@ const ResourceCard = (props: ResourceCardPropsTypes) => {
               title='Paella dish'
             />
           </CardContent>
-          <CardActions>
-            <Button className={classes.title} size='small' variant='outlined'>
+          <CardContent>
+            <Typography
+              noWrap
+              variant='body2'
+              color='secondary'
+              component='div'
+            >
+              {props.description}
+            </Typography>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'space-between' }}>
+            <Button
+              className={classes.title}
+              size='small'
+              variant='outlined'
+              startIcon={<OpenInBrowserIcon />}
+              onClick={() => {
+                history.push(getPostPathById(props.postId))
+              }}
+            >
               View
+            </Button>
+            <Button
+              className={classes.title}
+              size='small'
+              variant='outlined'
+              startIcon={<LaunchIcon />}
+              onClick={() => {
+                window.open(props.url)
+              }}
+            >
+              VISIT
             </Button>
           </CardActions>
         </>

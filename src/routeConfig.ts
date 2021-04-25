@@ -18,6 +18,11 @@ export const routeConfig: RouteConfig = {
     exact: true,
     path: '/'
   },
+  post: {
+    render: lazyLoader(() => import('./container/PostDetails')),
+    exact: true,
+    path: '/post/:postId'
+  },
   createPost: {
     render: lazyLoader(() => import('./container/CreatePostContainer')),
     exact: true,

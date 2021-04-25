@@ -7,4 +7,9 @@
 //   }
 //   return false
 // }
-export {}
+
+import { routeConfig } from '../routeConfig'
+
+export const getPostPathById = (id: string) => {
+  return routeConfig.post.path.replace(':postId', id)
+}
