@@ -1,0 +1,41 @@
+{
+  "auth": {
+    "devresources7124b413": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "api": {
+    "DevResourcesAPI": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authdevresources7124b413"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "description": "devresourcesAPI"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "storage": {
+    "DevResources": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+type Post
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }])
+  @aws_api_key {
+  id: ID!
+  title: String!
+  description: String!
+  imageName: String
+  url: AWSURL!
+  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  upVotes: [UpVotes] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }])
+  @key(name: "byPost", fields: ["postID", "content"]) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  content: String!
+}
+
+type UpVotes
+  @model
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }])
+  @key(name: "byPost", fields: ["postID"]) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+}
