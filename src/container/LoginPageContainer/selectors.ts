@@ -11,10 +11,11 @@ export const selectAttributes = () =>
     (substate: any) => get(substate, 'attributes') as UserAttributes
   )
 
-export const selectIsLoggedIn = () =>
-  createSelector(
-    selectLoginContainer,
-    (substate: any) => get(substate, 'isLoggedIn') as boolean
+export const selectIsLoggedIn = (isLoggedIn?: boolean) =>
+  createSelector(selectLoginContainer, (substate: any) =>
+    isLoggedIn !== undefined
+      ? isLoggedIn
+      : (get(substate, 'isLoggedIn') as boolean)
   )
 
 export const selectLoading = () =>
