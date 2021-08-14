@@ -17,5 +17,9 @@ const usePageLayoutStyles = makeStyles((theme: Theme) => ({
 export default function PageLayout(props: TPageLayoutPropsType) {
   const classes = usePageLayoutStyles()
 
-  return <div className={classes.root}>{props.children}</div>
+  return (
+    <div data-testid='pageLayout' className={classes.root}>
+      {props.children}
+    </div>
+  )
 }
