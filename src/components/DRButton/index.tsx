@@ -1,4 +1,5 @@
 import { Button, ButtonProps, CircularProgress } from '@material-ui/core'
+import { memo } from 'react'
 
 interface DRButtonPropsTypes extends ButtonProps {
   onClick?: () => void
@@ -10,6 +11,7 @@ function DRButton(props: DRButtonPropsTypes) {
   const { onClick, loading, label } = props
   return (
     <Button
+      data-testid='button'
       variant='outlined'
       color='secondary'
       onClick={onClick}
@@ -22,4 +24,4 @@ function DRButton(props: DRButtonPropsTypes) {
   )
 }
 
-export default DRButton
+export default memo(DRButton)

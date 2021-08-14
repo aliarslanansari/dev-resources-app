@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DRButton /> should render and match the snapshot 1`] = `
+<body>
+  <div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary"
+      data-testid="button"
+      label="Create Post"
+      style="margin: 16px;"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Create Post
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+</body>
+`;
